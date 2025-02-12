@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1b7b7;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .banner {
+            background-color: #ff0000;
+            color: white;
+            font-size: 24px;
+            padding: 20px;
+            width: 100%;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('img/juegos.gif') center/cover no-repeat;
+            display: none;
+            z-index: 1;
+        }
+        .cards {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 250px;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .card img {
+            width: 100%;
+            height: 85%;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        .card p {
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .hidden {
+            display: none;
+        }
+        .message-section {
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                max-width: 90%;
+            }
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            button {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    <div class="banner">Hola mi amor pequeño, ¿quieres ser mi San Valentín para este 14? Prometo quererte ❤️</div>
+    <div class="container">
+        <div class="cards" id="cards">
+            <div class="card"><img src="img/imagen1.jpg" alt="Imagen 1"><p>Eres</p></div>
+            <div class="card"><img src="img/imagen2.jpg" alt="Imagen 2"><p>y serás</p></div>
+            <div class="card"><img src="img/imagen3.jpg" alt="Imagen 3"><p>mi personita</p></div>
+            <div class="card"><img src="img/imagen4.jpg" alt="Imagen 4"><p>especial.</p></div>
+        </div>
+        <div class="buttons">
+            <button onclick="showMessage(true)">Sí</button>
+            <button onclick="showMessage(false)">No</button>
+        </div>
+        <div class="message-section">
+            <div id="message" class="hidden card"></div>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        function showMessage(response) {
+            let messageDiv = document.getElementById("message");
+            let cardsDiv = document.getElementById("cards");
+            let fireworksDiv = document.getElementById("fireworks");
+            if (response) {
+                cardsDiv.style.display = "none";
+                fireworksDiv.style.display = "block";
+                messageDiv.innerHTML = "<h2>Gracias por aceptar mi amor 💖</h2><img src='img/feliz.jpg' alt='Sí imagen' width='300px'><p>Tendremos una salida muy perfecta ✨</p>";
+            } else {
+                cardsDiv.style.display = "none";
+                fireworksDiv.style.display = "none";
+                if (noClickCount % 2 === 0) {
+                    messageDiv.innerHTML = "<h2>Piensalo bien por favor 😢</h2><img src='img/pato.jpg' alt='No imagen' width='300px'><p>Yo te amo ❤️</p>";
+                } else {
+                    messageDiv.innerHTML = "<h2>Por favor deja de poner no 😭</h2><img src='img/peor.jpg' alt='No imagen' width='300px'><p>No quiero pasarla sin ti 💔</p>";
+                }
+                noClickCount++;
+            }
+            messageDiv.classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
